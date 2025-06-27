@@ -33,3 +33,15 @@ def load_data_file(method):
         except:
             st.error("⚠️ فشل في تحميل الملف")
     return None, None
+
+def load_data():
+    method = st.radio("📥 اختاري طريقة تحميل البيانات:", ["Manual Input", "Upload CSV File", "Upload Excel File"])
+
+    if method == "Manual Input":
+        return load_data_manual()
+    elif method == "Upload CSV File":
+        return load_data_file("رفع ملف CSV")
+    elif method == "Upload Excel File":
+        return load_data_file("رفع ملف Excel")
+    else:
+        return None, None
