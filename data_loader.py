@@ -9,11 +9,12 @@ def load_data_manual():
         try:
             X = np.array([float(i) for i in x_input.split(",")]).reshape(-1, 1)
             y = np.array([float(i) for i in y_input.split(",")])
-            return X, y
+            df = pd.DataFrame({"X": X.flatten(), "y": y})
+            return X, y, df
         except:
             st.error("⚠️ تأكدي من إدخال أرقام صحيحة")
-            return None, None
-    return None, None
+            return None, None, None
+    return None, None, None
 
 def load_data_file(method):
     uploaded_file = st.file_uploader("📤 حملي الملف:", type=["csv", "xlsx"])
@@ -29,10 +30,10 @@ def load_data_file(method):
             y_col = st.selectbox("اختاري عمود Y:", df.columns)
             X = df[[x_col]].values
             y = df[y_col].values
-            return X, y
+            return X, y, df
         except:
             st.error("⚠️ فشل في تحميل الملف")
-    return None, None
+    return None, None, None
 
 def load_data():
     method = st.radio("📥 اختاري طريقة تحميل البيانات:", ["Manual Input", "Upload CSV File", "Upload Excel File"])
@@ -44,4 +45,4 @@ def load_data():
     elif method == "Upload Excel File":
         return load_data_file("رفع ملف Excel")
     else:
-        return None, None
+        return None, None, None
