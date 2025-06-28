@@ -1,4 +1,3 @@
-
 import streamlit as st
 from data_loader import load_data
 from models.regression import handle_regression_models
