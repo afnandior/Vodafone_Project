@@ -3,8 +3,8 @@ from data_loader import load_data
 from models.regression import handle_regression_models
 from models.classification import handle_classification_models
 from models.clustering import handle_clustering_models
-from models.pca import handle_pca
-from models.time_series import handle_time_series
+from models.pca import handle_pca_models
+from models.time_series import handle_time_series_models
 from plotter import plot_results
 from utils import display_results, download_results
 
