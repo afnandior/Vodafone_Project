@@ -1,15 +1,13 @@
 from sklearn.decomposition import PCA
 
-def pca_reduction(X, n_components):
-    pca = PCA(n_components=n_components)
-    X_reduced = pca.fit_transform(X)
-    return X_reduced, pca
+def pca_transform(X, n_components=2):
+    model = PCA(n_components=n_components)
+    X_reduced = model.fit_transform(X)
+    return model, X_reduced
 
 # 🔥 Main Controller Function
-def handle_pca(X, n_components=None):
+def handle_pca_models(X, n_components=2):
     """
-    Handles PCA dimensionality reduction.
+    Handles PCA transformation.
     """
-    n_components = n_components or 2
-    X_reduced, pca = pca_reduction(X, n_components)
-    return X_reduced
+    return pca_transform(X, n_components)
