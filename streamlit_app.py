@@ -33,10 +33,10 @@ if X is not None and (y is not None or model_type in ["KMeans Clustering", "DBSC
         elif model_type in ["KMeans Clustering", "DBSCAN Clustering"]:
             model, y_pred, extra = handle_clustering_models(model_type, X)
         elif model_type == "PCA (Principal Component Analysis)":
-            X_reduced = handle_pca(X)
+            X_reduced = handle_pca_models(X)
             extra["X_reduced"] = X_reduced
         elif model_type == "Time Series Forecasting (ARIMA)":
-            y_pred = handle_time_series(y)
+            y_pred = handle_time_series_models(y)
 
         display_results(model_type, X, y, y_pred, model, extra)
         plot_results(model_type, X, y, y_pred, extra)
