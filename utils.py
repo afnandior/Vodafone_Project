@@ -45,9 +45,17 @@ def display_results(model_type, X, y, y_pred, model, context):
         st.write("R² Score:", r2_score(y, y_pred))
         result_df = pd.DataFrame({"X": X.flatten(), "Predicted": y_pred})
 
+    # حفظ النتائج في context لاستخدامها في التنزيل
     context["result_df"] = result_df
 
 def download_results(model_type, X, y_pred, context):
     result_df = context.get("result_df")
     if result_df is not None:
-        st.down
+        st.download_button(
+            "📥 تحميل النتائج كـ CSV",
+            data=result_df.to_csv(index=False),
+            file_name="results.csv",
+            mime="text/csv"
+        )
+    else:
+        st.warning("⚠️ لا توجد نتائج للتحميل.")
