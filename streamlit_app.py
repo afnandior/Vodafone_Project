@@ -1,10 +1,10 @@
 import streamlit as st
 from data_loader import load_data
-from models.regression_models import handle_regression_models
-from models.classification_models import handle_classification_models
-from models.clustering_models import handle_clustering_models
-from models.pca_model import handle_pca
-from models.time_series_models import handle_time_series
+from models.regression import handle_regression_models
+from models.classification import handle_classification_models
+from models.clustering import handle_clustering_models
+from models.pca import handle_pca
+from models.time_series import handle_time_series
 from plotter import plot_results
 from utils import display_results, download_results
 
