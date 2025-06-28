@@ -1,9 +1,8 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 from sklearn.metrics import mean_squared_error, r2_score, accuracy_score, confusion_matrix
 
-def display_metrics(model_type, X, y, y_pred, model, context):
+def display_results(model_type, X, y, y_pred, model, context):
     st.subheader("📊 النتائج")
     result_df = None
 
@@ -21,7 +20,7 @@ def display_metrics(model_type, X, y, y_pred, model, context):
         result_df = pd.DataFrame({"X": X.flatten(), "Predicted": y_pred})
 
     elif model_type in ["KMeans Clustering", "DBSCAN Clustering"]:
-        st.write("📌 التصنيفات:", np.unique(y_pred))
+        st.write("📌 التصنيفات:", set(y_pred))
         result_df = pd.DataFrame({"X": X.flatten(), "Cluster": y_pred})
         st.write(result_df)
 
@@ -38,11 +37,17 @@ def display_metrics(model_type, X, y, y_pred, model, context):
         st.write(result_df)
 
     else:
-        st.write("📈 المعاملات:", model.coef_ if hasattr(model, 'coef_') else "غير متاحة")
-        st.write("📍 الثابت:", model.intercept_ if hasattr(model, 'intercept_') else "غير متاح")
+        if hasattr(model, 'coef_'):
+            st.write("📈 المعاملات:", model.coef_)
+        if hasattr(model, 'intercept_'):
+            st.write("📍 الثابت:", model.intercept_)
         st.write("MSE:", mean_squared_error(y, y_pred))
         st.write("R² Score:", r2_score(y, y_pred))
         result_df = pd.DataFrame({"X": X.flatten(), "Predicted": y_pred})
 
+    context["result_df"] = result_df
+
+def download_results(model_type, X, y_pred, context):
+    result_df = context.get("result_df")
     if result_df is not None:
-        st.download_button("📥 تحميل النتائج كـ CSV", data=result_df.to_csv(index=False), file_name="results.csv", mime="text/csv")
+        st.down
