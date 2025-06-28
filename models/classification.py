@@ -11,3 +11,19 @@ def decision_tree_classifier(X, y):
     y_pred = model.predict(X)
     return model, y_pred
 
+# 🔥 Main Controller Function
+def handle_classification_models(model_type, X, y):
+    """
+    Handles classification model selection and execution.
+    """
+    if model_type == "Logistic Regression":
+        model, y_pred = logistic_regression(X, y)
+        return model, y_pred, {}
+    
+    elif model_type == "Decision Tree Classification":
+        model, y_pred = decision_tree_classifier(X, y)
+        return model, y_pred, {}
+    
+    else:
+        return None, None, {}
+
