@@ -9,7 +9,7 @@ def plot_results(model_type, X, y, y_pred, context):
 
     if model_type == "PCA (Principal Component Analysis)":
         X_reduced = context.get("X_reduced")
-        if X_reduced.shape[1] >= 2:
+        if X_reduced is not None and X_reduced.shape[1] >= 2:
             ax.scatter(X_reduced[:, 0], X_reduced[:, 1])
             ax.set_xlabel("PC1")
             ax.set_ylabel("PC2")
