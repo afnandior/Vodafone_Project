@@ -1,14 +1,14 @@
 from statsmodels.tsa.arima.model import ARIMA
 
-def arima_forecast(y, order):
-    model = ARIMA(y, order=order).fit()
-    y_pred = model.forecast(steps=5)  # تتوقع 5 خطوات للأمام
-    return y_pred, model
+def arima_forecast(y, order=(1,1,1), steps=5):
+    model = ARIMA(y, order=order)
+    model_fit = model.fit()
+    y_pred = model_fit.predict(start=0, end=len(y)+steps-1)
+    return model_fit, y_pred
 
 # 🔥 Main Controller Function
-def handle_time_series(y, order=(1,1,1)):
+def handle_time_series_models(y, order=(1,1,1), steps=5):
     """
-    Handles Time Series forecasting using ARIMA.
+    Handles Time Series ARIMA model.
     """
-    y_pred, model = arima_forecast(y, order)
-    return y_pred
+    return arima_forecast(y, order, steps)
