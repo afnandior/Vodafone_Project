@@ -1,6 +1,14 @@
 import pandas as pd
 
 def clean_data(X, y):
+    # لو X جايه numpy array حولها DataFrame
+    if isinstance(X, np.ndarray):
+        X = pd.DataFrame(X)
+
+    # لو y جايه numpy array حولها Series
+    if isinstance(y, np.ndarray):
+        y = pd.Series(y)
+
     # Convert y to numeric
     y = pd.to_numeric(y, errors='coerce')
 
@@ -13,6 +21,15 @@ def clean_data(X, y):
     y_clean = y[mask]
 
     return X_clean, y_clean
+
+
+
+
+
+
+
+
+
 
 
 
