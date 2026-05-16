@@ -4,7 +4,7 @@ import numpy as np
 from io import BytesIO
 
 def plot_results(model_type, X, y, y_pred, context):
-    st.subheader("📉 الرسم البياني")
+    st.subheader("plt  ")
     fig, ax = plt.subplots()
 
     if model_type == "PCA (Principal Component Analysis)":
@@ -45,4 +45,4 @@ def plot_results(model_type, X, y, y_pred, context):
 
     buf = BytesIO()
     fig.savefig(buf, format="png")
-    st.download_button("📸 تحميل الرسم كصورة", data=buf.getvalue(), file_name="plot.png", mime="image/png")
+    st.download_button("upload image", data=buf.getvalue(), file_name="plot.png", mime="image/png")
