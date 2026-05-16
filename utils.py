@@ -3,18 +3,18 @@ import pandas as pd
 from sklearn.metrics import mean_squared_error, r2_score, accuracy_score, confusion_matrix
 
 def display_results(model_type, X, y, y_pred, model, context):
-    st.subheader("📊 النتائج")
+    st.subheader("result")
     result_df = None
 
     if model_type in ["Logistic Regression", "Decision Tree Classification"]:
-        st.write("✅ الدقة (Accuracy):", accuracy_score(y, y_pred))
-        st.write("📉 مصفوفة الالتباس:", confusion_matrix(y, y_pred))
+        st.write("  (Accuracy):", accuracy_score(y, y_pred))
+        st.write(" confusion_matrix:", confusion_matrix(y, y_pred))
         result_df = pd.DataFrame({"X": X.flatten(), "Predicted": y_pred})
 
     elif model_type == "Nonlinear Regression (Exponential)":
         a = context.get("a")
         b = context.get("b")
-        st.write(f"📈 الدالة: y = {a:.3f} * exp({b:.3f} * x)")
+        st.write(f" funcation: y = {a:.3f} * exp({b:.3f} * x)")
         st.write("MSE:", mean_squared_error(y, y_pred))
         st.write("R² Score:", r2_score(y, y_pred))
         result_df = pd.DataFrame({"X": X.flatten(), "Predicted": y_pred})
@@ -45,17 +45,16 @@ def display_results(model_type, X, y, y_pred, model, context):
         st.write("R² Score:", r2_score(y, y_pred))
         result_df = pd.DataFrame({"X": X.flatten(), "Predicted": y_pred})
 
-    # حفظ النتائج في context لاستخدامها في التنزيل
     context["result_df"] = result_df
 
 def download_results(model_type, X, y_pred, context):
     result_df = context.get("result_df")
     if result_df is not None:
         st.download_button(
-            "📥 تحميل النتائج كـ CSV",
+            "uploded result as CSV",
             data=result_df.to_csv(index=False),
             file_name="results.csv",
             mime="text/csv"
         )
     else:
-        st.warning("⚠️ لا توجد نتائج للتحميل.")
+        st.warning("⚠️ no result for uploded.")
