@@ -9,23 +9,23 @@ from plotter import plot_results
 from utils import display_results, download_results
 
 st.set_page_config(page_title="ML Tool", layout="centered")
-st.title("🧠 AI Tool for Regression, Classification, Clustering, and Time Series")
+st.title(" AI Tool for Regression, Classification, Clustering, and Time Series")
 
-# تحميل البيانات
+# load_data
 X, y, df = load_data()
 
-# تحديد نوع النموذج
-model_type = st.selectbox("اختاري نوع التحليل:", [
+#  identify type analysis
+model_type = st.selectbox("identify type analysis:", [
     "Linear Regression", "Polynomial Regression", "Ridge Regression", "Lasso Regression", "ElasticNet Regression",
     "Logistic Regression", "Nonlinear Regression (Exponential)",
     "KMeans Clustering", "DBSCAN Clustering", "Decision Tree Classification",
     "PCA (Principal Component Analysis)", "Time Series Forecasting (ARIMA)"
 ])
 
-# تنفيذ النموذج
+#  run model
 model, y_pred, extra = None, None, {}
 if X is not None and (y is not None or model_type in ["KMeans Clustering", "DBSCAN Clustering", "PCA (Principal Component Analysis)", "Time Series Forecasting (ARIMA)"]):
-    if st.button("تشغيل النموذج"):
+    if st.button("run model"):
         if model_type in ["Linear Regression", "Polynomial Regression", "Ridge Regression", "Lasso Regression", "ElasticNet Regression", "Nonlinear Regression (Exponential)"]:
             model, y_pred, extra = handle_regression_models(model_type, X, y)
         elif model_type in ["Logistic Regression", "Decision Tree Classification"]:
